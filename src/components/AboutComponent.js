@@ -2,15 +2,32 @@ import React from 'react';
 import { Breadcrumb, BreadcrumbItem, Card, CardBody, CardHeader, Media } from 'reactstrap';
 import { Link } from 'react-router-dom';
 
+
+function RenderLeader({ leader }) {
+    return (
+        <div className="media">
+            <div className="media-left media-middle">
+                <img className="media-object img-thumbnail" src={leader.image} alt={leader.name} />
+            </div>
+            <div class="media-body">
+                <h2 class="media-heading">{leader.name}</h2>
+                <h2 class="media-heading"><small><i>   {leader.designation}</i> </small></h2>
+                <p>{leader.description}</p>
+            </div>
+        </div>
+    );
+}
+
+
 function About(props) {
 
     const leaders = props.leaders.map((leader) => {
         return (
-            <p>Leader {leader.name}</p>
+            <RenderLeader leader={leader} />
         );
     });
 
-    return(
+    return (
         <div className="container">
             <div className="row">
                 <Breadcrumb>
@@ -20,7 +37,7 @@ function About(props) {
                 <div className="col-12">
                     <h3>About Us</h3>
                     <hr />
-                </div>                
+                </div>
             </div>
             <div className="row row-content">
                 <div className="col-12 col-md-6">
