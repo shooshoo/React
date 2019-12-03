@@ -1,4 +1,5 @@
 import React from 'react';
+import Comments from './CommentsComponent';
 import {
     Card, CardImg, CardImgOverlay, CardText, CardBody, CardTitle, Breadcrumb, BreadcrumbItem
 } from 'reactstrap';
@@ -24,7 +25,7 @@ function RenderDish({ dish }) {
 }
 
 function RenderComments({ comments }) {
-    if (comments != null) {
+  /*   if (comments != null) {
         const commentsList = comments.map((commentObj) => {
             return (
                 <ul class="list-unstyled">
@@ -43,6 +44,10 @@ function RenderComments({ comments }) {
     }
     else return (
         <div></div>
+    ); */
+
+    return (
+        <Comments comments={comments}></Comments>
     );
 
 }

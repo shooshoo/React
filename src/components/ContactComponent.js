@@ -178,6 +178,7 @@ class Contact extends Component {
                                     </Control.select>
                                 </Col>
                             </Row>
+                           
                             <Row className='form-group'>
                                 <Label htmlFor="message" md={2}>Your Feedback
                                   </Label>
