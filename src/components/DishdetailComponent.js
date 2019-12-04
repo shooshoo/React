@@ -25,27 +25,6 @@ function RenderDish({ dish }) {
 }
 
 function RenderComments({ comments }) {
-  /*   if (comments != null) {
-        const commentsList = comments.map((commentObj) => {
-            return (
-                <ul class="list-unstyled">
-                    <li>{commentObj.comment}</li>
-                    <li>-- {commentObj.author} , {new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: '2-digit' }).format(new Date(Date.parse(commentObj.date)))}</li>
-                </ul>
-            );
-        });
-
-        return (
-            <div>
-                <h1>Comments</h1>
-                {commentsList}
-            </div>
-        );
-    }
-    else return (
-        <div></div>
-    ); */
-
     return (
         <Comments comments={comments}></Comments>
     );
