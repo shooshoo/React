@@ -1,13 +1,15 @@
 import React from 'react';
 import { Breadcrumb, BreadcrumbItem, Card, CardBody, CardHeader, Media } from 'reactstrap';
 import { Link } from 'react-router-dom';
+import { baseUrl } from '../shared/baseUrl';
+import { Loading } from './LoadingComponent';
 
 
 function RenderLeader({ leader }) {
     return (
         <div className="media">
             <div className="media-left media-middle">
-                <img className="media-object img-thumbnail" src={leader.image} alt={leader.name} />
+                <img className="media-object img-thumbnail" src={baseUrl + leader.image} alt={leader.name} />
             </div>
             <div class="media-body">
                 <h2 class="media-heading">{leader.name}</h2>
@@ -18,14 +20,52 @@ function RenderLeader({ leader }) {
     );
 }
 
+function RenderLeaderList({ props }) {
+    if (props.isLoading) {
+
+        return (
+            <div className="container">
+                <div className="row">
+                    <Loading />
+                </div>
+            </div>
+        );
+
+    }
+    else if (props.errMess) {
+
+        return (
+            <div className="container">
+                <div className="row">
+                    <h4>{props.errMess}</h4>
+                </div>
+            </div>
+        );
+
+    }
+    else if (props.leaders != null) {
+        const leaders = props.leaders.map((leader) => {
+            return (
+                <RenderLeader leader={leader} />
+            );
+        });
+        return (
+            <Media list>
+                {leaders}
+            </Media>
+        )
+    }
+    else {
+
+        return (
+            <div></div>
+        );
+
+    }
+}
+
 
 function About(props) {
-
-    const leaders = props.leaders.map((leader) => {
-        return (
-            <RenderLeader leader={leader} />
-        );
-    });
 
     return (
         <div className="container">
@@ -82,13 +122,26 @@ function About(props) {
                     <h2>Corporate Leadership</h2>
                 </div>
                 <div className="col-12">
-                    <Media list>
-                        {leaders}
-                    </Media>
+                    <RenderLeaderList props={props} />
                 </div>
             </div>
         </div>
     );
+    /* }
+    else {
+
+        return (
+            <div></div>
+        );
+
+    } */
+
+
+
+
+
+
+
 }
 
 export default About;    

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Button, Modal, ModalHeader, ModalBody, Form, FormGroup, Input, Label, Col, Row } from 'reactstrap';
 import { Control, LocalForm, Errors } from 'react-redux-form';
+import { FadeTransform, Fade, Stagger } from 'react-animation-components';
 
 const required = (val) => val && val.length;
 const maxLength = (len) => (val) => !(val) || (val.length <= len);
@@ -26,9 +27,9 @@ class Comments extends Component {
 
     handleSubmit(values) {
         this.toggleModal();
-        this.props.postComment(this.props.dishId, values.rating, values.name, 
+        this.props.postComment(this.props.dishId, values.rating, values.name,
             values.comment);
-  
+
     }
 
     render() {
@@ -36,10 +37,16 @@ class Comments extends Component {
         if (this.props.comments != null) {
             const commentsList = this.props.comments.map((commentObj) => {
                 return (
-                    <ul class="list-unstyled">
-                        <li>{commentObj.comment}</li>
-                        <li>-- {commentObj.author} , {new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: '2-digit' }).format(new Date(Date.parse(commentObj.date)))}</li>
-                    </ul>
+                    <Stagger in>
+                        <ul class="list-unstyled">
+
+                            <Fade in>
+                                <li>{commentObj.comment}</li>
+                                <li>-- {commentObj.author} , {new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: '2-digit' }).format(new Date(Date.parse(commentObj.date)))}</li>
+                            </Fade>
+
+                        </ul>
+                    </Stagger>
                 );
             });
 
@@ -47,7 +54,9 @@ class Comments extends Component {
                 <React.Fragment>
                     <div>
                         <h1>Comments</h1>
+
                         {commentsList}
+
                         <Button outline onClick={this.toggleModal}><span className="fa fa-comment fa-lg"></span> Submit Comment</Button>
                     </div>
                     <Modal isOpen={this.state.isModalOpen} toggle={this.toggleModal}>
