@@ -16,14 +16,21 @@ class Contact extends Component {
         super(props);
 
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleOnclick=this.handleOnclick.bind(this);
     }
 
     handleSubmit(values) {
         console.log('Current State is: ' + JSON.stringify(values));
         alert('Current State is: ' + JSON.stringify(values));
+        this.props.postFeedback(values.firstname, values.lastname, values.telnum, values.email, values.agree, values.contactType, values.message);
+        alert('Current State is: ' + JSON.stringify(this.props.feedbacks));
         this.props.resetFeedbackForm();
     }
 
+    handleOnclick()
+    {
+        alert('Current State is: ' + JSON.stringify(this.props.feedbacks));
+    }
 
     render() {
 
@@ -194,6 +201,7 @@ class Contact extends Component {
                                     <Button type="submit" color="primary">
                                         Send Feedback
                                     </Button>
+                                    <Button onClick = {this.handleOnclick} >click</Button>
                                 </Col>
                             </Row>
 
