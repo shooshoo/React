@@ -219,7 +219,8 @@ export const postFeedback = (firstname, lastname, telnum, email,agree,contactTyp
             }
         },
             error => {
-                throw error;
+                var errmess = new Error(error.message);
+                throw errmess;
             })
         .then(response => response.json())
         .then(response =>{
